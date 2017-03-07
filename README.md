@@ -1,5 +1,6 @@
 # RssRecording
-VB.NET Project for school. I just had to make a form that accepted input to a database, but I wanted to try my hand at multiple forms and also pulling web content into my program.
+VB.NET Project for school. I had to make a form that accepted and saved input to a database, but I also wanted to try my hand at multiple forms and pulling web content into my program. I think it turned out well for revision one. I need to flesh out modify, refresh, and delete commands, then I think might add story viewing features.
+
 
     Option Explicit On
     Option Strict On
