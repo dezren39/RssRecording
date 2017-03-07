@@ -1,0 +1,40 @@
+C:\Users\drewr\AppData\Local\Temporary Projects\RssRecording\bin\Debug\RssRecording.exe.config
+C:\Users\drewr\AppData\Local\Temporary Projects\RssRecording\bin\Debug\RssRecording.exe
+C:\Users\drewr\AppData\Local\Temporary Projects\RssRecording\bin\Debug\RssRecording.pdb
+C:\Users\drewr\AppData\Local\Temporary Projects\RssRecording\bin\Debug\RssRecording.xml
+C:\Users\drewr\AppData\Local\Temporary Projects\RssRecording\obj\Debug\RssRecording.vbprojResolveAssemblyReference.cache
+C:\Users\drewr\AppData\Local\Temporary Projects\RssRecording\obj\Debug\RssRecording.RssMainForm.resources
+C:\Users\drewr\AppData\Local\Temporary Projects\RssRecording\obj\Debug\RssRecording.Resources.resources
+C:\Users\drewr\AppData\Local\Temporary Projects\RssRecording\obj\Debug\RssRecording.RssSingleForm.resources
+C:\Users\drewr\AppData\Local\Temporary Projects\RssRecording\obj\Debug\RssRecording.vbproj.GenerateResource.Cache
+C:\Users\drewr\AppData\Local\Temporary Projects\RssRecording\obj\Debug\RssRecording.exe
+C:\Users\drewr\AppData\Local\Temporary Projects\RssRecording\obj\Debug\RssRecording.xml
+C:\Users\drewr\AppData\Local\Temporary Projects\RssRecording\obj\Debug\RssRecording.pdb
+E:\Users\drewr\Documents\Visual Studio 2017\Projects\RssRecording\RssRecording\bin\Debug\RssRecording.exe.config
+E:\Users\drewr\Documents\Visual Studio 2017\Projects\RssRecording\RssRecording\bin\Debug\RssRecording.exe
+E:\Users\drewr\Documents\Visual Studio 2017\Projects\RssRecording\RssRecording\bin\Debug\RssRecording.pdb
+E:\Users\drewr\Documents\Visual Studio 2017\Projects\RssRecording\RssRecording\bin\Debug\RssRecording.xml
+E:\Users\drewr\Documents\Visual Studio 2017\Projects\RssRecording\RssRecording\obj\Debug\RssRecording.vbprojResolveAssemblyReference.cache
+E:\Users\drewr\Documents\Visual Studio 2017\Projects\RssRecording\RssRecording\obj\Debug\RssRecording.RssMainForm.resources
+E:\Users\drewr\Documents\Visual Studio 2017\Projects\RssRecording\RssRecording\obj\Debug\RssRecording.Resources.resources
+E:\Users\drewr\Documents\Visual Studio 2017\Projects\RssRecording\RssRecording\obj\Debug\RssRecording.RssSingleForm.resources
+E:\Users\drewr\Documents\Visual Studio 2017\Projects\RssRecording\RssRecording\obj\Debug\RssRecording.vbproj.GenerateResource.Cache
+E:\Users\drewr\Documents\Visual Studio 2017\Projects\RssRecording\RssRecording\obj\Debug\RssRecording.exe
+E:\Users\drewr\Documents\Visual Studio 2017\Projects\RssRecording\RssRecording\obj\Debug\RssRecording.xml
+E:\Users\drewr\Documents\Visual Studio 2017\Projects\RssRecording\RssRecording\obj\Debug\RssRecording.pdb
+e:\Users\drewr\Documents\Visual Studio 2017\Projects\RssRecording\RssRecording\bin\Debug\RssRecording.mdf
+e:\Users\drewr\Documents\Visual Studio 2017\Projects\RssRecording\RssRecording\bin\Debug\RssRecording_log.ldf
+C:\Users\drewr\Desktop\RssRecording\RssRecording\obj\Debug\RssRecording.vbprojResolveAssemblyReference.cache
+C:\Users\drewr\Desktop\RssRecording\RssRecording\obj\Debug\RssRecording.RssMainForm.resources
+C:\Users\drewr\Desktop\RssRecording\RssRecording\obj\Debug\RssRecording.Resources.resources
+C:\Users\drewr\Desktop\RssRecording\RssRecording\obj\Debug\RssRecording.RssSingleForm.resources
+C:\Users\drewr\Desktop\RssRecording\RssRecording\obj\Debug\RssRecording.vbproj.GenerateResource.Cache
+C:\Users\drewr\Desktop\RssRecording\RssRecording\obj\Debug\RssRecording.exe
+C:\Users\drewr\Desktop\RssRecording\RssRecording\obj\Debug\RssRecording.xml
+C:\Users\drewr\Desktop\RssRecording\RssRecording\obj\Debug\RssRecording.pdb
+C:\Users\drewr\Desktop\RssRecording\RssRecording\bin\Debug\RssRecording.mdf
+C:\Users\drewr\Desktop\RssRecording\RssRecording\bin\Debug\RssRecording_log.ldf
+C:\Users\drewr\Desktop\RssRecording\RssRecording\bin\Debug\RssRecording.exe.config
+C:\Users\drewr\Desktop\RssRecording\RssRecording\bin\Debug\RssRecording.exe
+C:\Users\drewr\Desktop\RssRecording\RssRecording\bin\Debug\RssRecording.pdb
+C:\Users\drewr\Desktop\RssRecording\RssRecording\bin\Debug\RssRecording.xml
