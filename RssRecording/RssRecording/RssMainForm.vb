@@ -14,12 +14,12 @@ Public Class RssMainForm
     '   https://www.codeproject.com/articles/820669/how-to-parse-rss-feeds-in-net
     '   https://msdn.microsoft.com/en-us/library/bb918016.aspx
 
-    Dim rssList As New BindingList(Of Rss)
+    Public Shared rssList As New BindingList(Of Rss)
     Dim selectedRss As Rss
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
 
-        Dim dbConnect As New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\drewr\Desktop\RssRecording\RssRecording\RssRecording.mdf;Integrated Security=True") ' "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & Environment.CurrentDirectory & "\RssRecording.mdf;Integrated Security=True")
+        Dim dbConnect As SqlConnection = dbConnectString()
 
         If txtUrl.Text Is Nothing Then
 
@@ -27,67 +27,87 @@ Public Class RssMainForm
 
         Else
 
+            Dim urlHolder = txtUrl.Text.ToLower
+
+            If Not urlHolder.StartsWith("http://") And Not urlHolder.StartsWith("https://") Then
+
+                txtUrl.Text = txtUrl.Text.Insert(0, "http://")
+
+            End If
+
             Dim newRss As New Rss(txtUrl.Text)
             Dim sqlString As String = "INSERT INTO Rss (Url, LastXML, Title) VALUES (@url, @xml, @title)"
-            Dim insertUpdate As New SqlCommand(sqlString, dbConnect)
+                Dim insertUpdate As New SqlCommand(sqlString, dbConnect)
 
-            Try
+                Try
 
-                Dim xmlVal = XDocument.Load(newRss.Url)
-                newRss.LastXML = xmlVal
-                ' MessageBox.Show(newRss.LastXML.ToString)
+                    Dim xmlVal = XDocument.Load(newRss.Url)
+                    newRss.LastXML = xmlVal
 
-            Catch ex As Exception
+                Catch ex As Exception
 
-                MessageBox.Show("Please enter a valid address, " + newRss.Url)
+                MessageBox.Show("Please enter a valid url." + vbCrLf + newRss.Url)
                 Return
 
-            End Try
+                End Try
 
-            newRss.Title = newRss.LastXML.<rss>.<channel>.<title>.Value
+                newRss.Title = newRss.LastXML.<rss>.<channel>.<title>.Value
 
-            insertUpdate.Parameters.AddWithValue("@url", newRss.Url)
-            insertUpdate.Parameters.AddWithValue("@xml", newRss.LastXML.ToString)
-            insertUpdate.Parameters.AddWithValue("@title", newRss.Title)
+                insertUpdate.Parameters.AddWithValue("@url", newRss.Url)
+                insertUpdate.Parameters.AddWithValue("@xml", newRss.LastXML.ToString)
+                insertUpdate.Parameters.AddWithValue("@title", newRss.Title)
 
-            Try
+                Try
 
-                dbConnect.Open()
+                    dbConnect.Open()
 
-                Dim rowsAffected = insertUpdate.ExecuteNonQuery()
+                    Dim rowsAffected = insertUpdate.ExecuteNonQuery()
 
                 If rowsAffected = 1 Then
+                    Dim identQuery As New SqlCommand("SELECT IDENT_CURRENT('Rss')", dbConnect)
+                    Dim identReader As SqlDataReader = identQuery.ExecuteReader()
+
+                    If identReader.HasRows Then
+
+                        identReader.Read()
+                        newRss.Id = CInt(identReader.Item(0))
+                        identReader.Close()
+
+                    End If
 
                     txtUrl.Text = ""
                     rssList.Add(newRss)
                     lbxRss.SelectedIndex = lbxRss.Items.Count - 1
-                    MessageBox.Show(selectedRss.Title + " was successfully added.")
+                    lbxRss_DoubleClick(sender, e)
 
                 Else
 
-                    MessageBox.Show("1: Sorry, Error. Try again.")
+                    MessageBox.Show("1: Sorry, DB Error. Try again.")
 
                 End If
 
-            Catch ex As Exception
+                Catch ex As Exception
 
-                MessageBox.Show("2: Sorry, Error. Try again.")
+                MessageBox.Show("2: Sorry, DB Error. Try again.")
 
             Finally
 
-                dbConnect.Close()
-                dbConnect.Dispose()
+                    dbConnect.Close()
+                    dbConnect.Dispose()
 
-            End Try
+                End Try
 
-        End If
+            End If
 
     End Sub
+    Public Function dbConnectString() As SqlConnection
+        Dim dbConnect As New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dpope3\Desktop\RssRecording\RssRecording\SchoolRssRecording.mdf;Integrated Security=True")
+        Return dbConnect
+    End Function
 
-    Private Sub RssMainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public Sub RssMainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Dim dbConnect As New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\drewr\Desktop\RssRecording\RssRecording\RssRecording.mdf;Integrated Security=True")
-
+        Dim dbConnect As SqlConnection = dbConnectString()
         lbxRss.DataSource = rssList
         lbxRss.DisplayMember = "Title"
 
@@ -104,6 +124,7 @@ Public Class RssMainForm
 
                     Dim dbRss As New Rss(reader.Item("Url").ToString)
 
+                    dbRss.Id = CInt(reader.Item("Id"))
 
                     If Not IsDBNull(reader.Item("LastXML")) Then
 
@@ -133,9 +154,11 @@ Public Class RssMainForm
 
                 End While
 
-                selectedRss = rssList.Item(rssList.Count - 1)
+                lbxRss.SelectedIndex = rssList.Count - 1
 
             End If
+
+            reader.Close()
 
         Catch ex As Exception
 
@@ -154,9 +177,42 @@ Public Class RssMainForm
 
         selectedRss = CType(lbxRss.SelectedItem, Rss)
 
+    End Sub
+
+    Private Sub lbxRss_DoubleClick(sender As Object, e As EventArgs) Handles lbxRss.DoubleClick
+
         Dim singleForm As New RssSingleForm(selectedRss)
 
-        singleForm.ShowDialog()
+        singleForm.Show()
+
+    End Sub
+
+    Private Sub BtnDel_Click(sender As Object, e As EventArgs) Handles BtnDel.Click
+
+        If Not lbxRss.SelectedItem Is Nothing Then
+
+            Dim dbConnect As SqlConnection = dbConnectString()
+            Dim deleteCommand As New SqlCommand("DELETE FROM Rss WHERE Id=@id", dbConnect)
+
+            deleteCommand.Parameters.AddWithValue("@id", selectedRss.Id)
+
+            Try
+                dbConnect.Open()
+                deleteCommand.ExecuteNonQuery()
+                rssList.RemoveAt(CInt(lbxRss.SelectedIndex))
+
+            Catch ex As Exception
+
+                MessageBox.Show("5: Sorry, DB Error. Try again.")
+
+            Finally
+
+                dbConnect.Close()
+                dbConnect.Dispose()
+
+            End Try
+
+        End If
 
     End Sub
 

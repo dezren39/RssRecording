@@ -7,6 +7,16 @@
 
     End Sub
 
+    Private IdVal As Integer
+    Public Property Id() As Integer
+        Get
+            Return IdVal
+        End Get
+        Set(ByVal value As Integer)
+            IdVal = value
+        End Set
+    End Property
+
     Private LastXmlValue As XDocument
     Public Property LastXML() As XDocument
         Get
