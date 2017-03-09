@@ -55,11 +55,13 @@ Public Class RssMainForm
                     Else
                         dbRss.Title = reader.Item("Title").ToString
                     End If
+                
                     rssList.Add(dbRss)
                 End While
-
+                
                 lbxRss.SelectedIndex = rssList.Count - 1
             End If
+            
             reader.Close()
         Catch ex As Exception
             MessageBox.Show("A6: Sorry, Error. Try again.")
@@ -92,7 +94,9 @@ Public Class RssMainForm
                 MessageBox.Show("A2: Sorry, invalid URL or web error. Please try again." + vbCrLf + newRss.Url)
                 Return
             End Try
+            
             newRss.Title = newRss.LastXML.<rss>.<channel>.<title>.Value
+           
             insertUpdate.Parameters.AddWithValue("@url", newRss.Url)
             insertUpdate.Parameters.AddWithValue("@xml", newRss.LastXML.ToString)
             insertUpdate.Parameters.AddWithValue("@title", newRss.Title)
@@ -100,14 +104,17 @@ Public Class RssMainForm
             Try
                 dbConnect.Open()
                 Dim rowsAffected = insertUpdate.ExecuteNonQuery()
+                
                 If rowsAffected = 1 Then
                     Dim identQuery As New SqlCommand("SELECT IDENT_CURRENT('Rss')", dbConnect)
                     Dim identReader As SqlDataReader = identQuery.ExecuteReader()
+                    
                     If identReader.HasRows Then
                         identReader.Read()
                         newRss.Id = CInt(identReader.Item(0))
                         identReader.Close()
                     End If
+                    
                     txtUrl.Text = ""
                     rssList.Add(newRss)
                     lbxRss.SelectedIndex = lbxRss.Items.Count - 1
