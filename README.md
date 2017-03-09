@@ -1,5 +1,6 @@
 # RssRecording
-VB.NET Project for school. I had to make a form that accepted and saved input to a database, but I also wanted to try my hand at multiple forms and pulling web content into my program. I think it turned out well for revision one. I need to flesh out the single Rss feed page more, however delete modify and add work sufficiently now.
+VB.NET Project for school. I had to make a form that accepted and saved input to a database, but I also wanted to try my hand at multiple forms and pulling web content into my program. I think it turned out well. I'd like to make the story form nice looking, and I'd also like to implement an RSS icon on the main form and pull icons for each RSS feed which would either get pulled each time one is opened, or stored in the DB and pulled each time the refresh button is pressed.
+
     Option Explicit On
     Option Strict On
 
