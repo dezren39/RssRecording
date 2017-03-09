@@ -6,43 +6,43 @@
         Me.Url = urlValue
     End Sub
 
-    Private IdVal As Integer
+    Private idVal As Integer
     Public Property Id() As Integer
         Get
-            Return IdVal
+            Return idVal
         End Get
         Set(ByVal value As Integer)
-            IdVal = value
+            idVal = value
         End Set
     End Property
 
-    Private LastXmlValue As XDocument
+    Private lastXmlValue As XDocument
     Public Property LastXML() As XDocument
         Get
-            Return LastXmlValue
+            Return lastXmlValue
         End Get
         Set(ByVal value As XDocument)
-            LastXmlValue = value
+            lastXmlValue = value
         End Set
     End Property
 
-    Private TitleValue As String
+    Private titleValue As String
     Public Property Title() As String
         Get
-            Return TitleValue
+            Return titleValue
         End Get
         Set(ByVal value As String)
-            TitleValue = value
+            titleValue = value
         End Set
     End Property
 
-    Private UrlValue As String
+    Private urlValue As String
     Public Property Url() As String
         Get
-            Return UrlValue
+            Return urlValue
         End Get
         Set(ByVal value As String)
-            UrlValue = value
+            urlValue = value
         End Set
     End Property
 End Class
