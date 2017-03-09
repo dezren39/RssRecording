@@ -1,10 +1,9 @@
 ﻿Public Class Rss
     Sub New()
-
     End Sub
+
     Sub New(ByVal urlValue As String)
         Me.Url = urlValue
-
     End Sub
 
     Private IdVal As Integer
@@ -46,5 +45,4 @@
             UrlValue = value
         End Set
     End Property
-
 End Class

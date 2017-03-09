@@ -117,6 +117,13 @@
     <Compile Include="RssSingleForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RssStoryForm.Designer.vb">
+      <DependentUpon>RssStoryForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RssStoryForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Story.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="RssMainForm.resx">
@@ -130,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RssSingleForm.resx">
       <DependentUpon>RssSingleForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RssStoryForm.resx">
+      <DependentUpon>RssStoryForm.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
