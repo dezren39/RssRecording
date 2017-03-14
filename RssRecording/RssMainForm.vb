@@ -17,8 +17,7 @@ Public Class RssMainForm
     Private selectedRss As Rss
 
     Public Function DbConnectString() As SqlConnection
-        Dim dbConnect As New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=B:\RssRecording-master\RssRecording\RssRecording.mdf;Integrated Security=True")
-        Return dbConnect
+        Return New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dpope3\Downloads\RssRecording-master\RssRecording\RssRecording.mdf;Integrated Security=True")
     End Function
 
     Public Sub Reload(sender As Object, e As EventArgs)
@@ -179,6 +178,7 @@ Public Class RssMainForm
             Dim singleForm As New RssSingleForm(selectedRss)
             singleForm.Show()
         End If
+
         If e.KeyCode = Keys.Escape Then
             Me.Close()
             Me.Dispose()
