@@ -3,6 +3,8 @@ VB.NET Project.
 
 I made an RSS reader that allows you to store RSS data in a database, add and delete RSS feeds, modify the RSS title, URL, and most recent XML data, refresh the RSS with the most recent XML data, view individual stories within the app, and open individual story URL's to your default browser. the listboxes also scroll. It was created as the final project for my VB.NET course in school. I believe I met and exceeded expectations for this assignment.
 
+
+
 #### Main Form
     Option Explicit On
     Option Strict On
