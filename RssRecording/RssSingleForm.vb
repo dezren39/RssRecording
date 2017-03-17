@@ -10,9 +10,22 @@ Public Class RssSingleForm
     Public Sub New(ByRef rssVal As Rss)
         ' This call is required by the designer.
         InitializeComponent()
-
         ' Add any initialization after the InitializeComponent() call.
         Me.selectedRss = rssVal
+
+        Expand_Rss()
+        Load_Story()
+    End Sub
+
+    Private Sub BtnMod_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
+        Modify_Rss()
+    End Sub
+
+    Private Sub BtnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        Refresh_Rss()
+    End Sub
+
+    Private Sub Expand_Rss()
         Me.Text = selectedRss.Title
 
         txtName.Text = selectedRss.Title
@@ -20,7 +33,17 @@ Public Class RssSingleForm
         rtbXml.Text = selectedRss.LastXML.ToString
         lblDispItem.Text = selectedRss.LastXML.<rss>.<channel>.<item>.<title>.Value
         rtbDescr.Text = selectedRss.LastXML.<rss>.<channel>.<description>.Value
+    End Sub
 
+    Private Sub LbxItems_DoubleClick(sender As Object, e As EventArgs) Handles lbxStory.DoubleClick
+        Open_Story()
+    End Sub
+
+    Private Sub LbxItems_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lbxStory.SelectedIndexChanged
+        Select_Current_Story()
+    End Sub
+
+    Private Sub Load_Story()
         Dim xelementHolder As XElement = XElement.Parse(selectedRss.LastXML.ToString)
         Dim stories As IEnumerable(Of XElement) = xelementHolder.Descendants("item")
 
@@ -30,7 +53,7 @@ Public Class RssSingleForm
         Next
     End Sub
 
-    Private Sub BtnMod_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
+    Private Sub Modify_Rss()
         Dim dbConnect = RssMainForm.DbConnectString
         Dim sqlString As String = "UPDATE Rss SET Url=@url, LastXML=@xml, Title=@title WHERE Id=@id"
         Dim insertUpdate As New SqlCommand(sqlString, dbConnect)
@@ -56,7 +79,7 @@ Public Class RssSingleForm
             Dim rowsAffected = insertUpdate.ExecuteNonQuery()
 
             If rowsAffected = 1 Then
-                RssMainForm.Reload(sender, e)
+                RssMainForm.Reload()
             Else
                 MessageBox.Show("B2: Sorry, DB Error. Try again.")
             End If
@@ -68,11 +91,15 @@ Public Class RssSingleForm
         End Try
     End Sub
 
-    Private Sub BtnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+    Private Sub Open_Story()
+        Select_Current_Story()
+    End Sub
+
+    Private Sub Refresh_Rss()
         Try
             Dim xmlVal = XDocument.Load(txtUrl.Text)
             rtbXml.Text = xmlVal.ToString
-            BtnMod_Click(sender, e)
+            Modify_Rss()
             storyList.Clear()
         Catch ex As Exception
             MessageBox.Show("B4: Sorry, invalid URL or web error. Please try again." + vbCrLf + txtUrl.Text)
@@ -86,15 +113,6 @@ Public Class RssSingleForm
             Dim storyHold As New Story(item.<title>.Value, item.<pubDate>.Value, item.<link>.Value, item.<description>.Value)
             storyList.Add(storyHold)
         Next
-    End Sub
-
-    Private Sub LbxItems_DoubleClick(sender As Object, e As EventArgs) Handles lbxStory.DoubleClick
-        Dim storyForm As New RssStoryForm(selectedStory)
-        storyForm.Show()
-    End Sub
-
-    Private Sub LbxItems_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lbxStory.SelectedIndexChanged
-        selectedStory = CType(lbxStory.SelectedItem, Story)
     End Sub
 
     Private Sub RssSingleForm_KeyEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
@@ -115,11 +133,21 @@ Public Class RssSingleForm
         lbxStory.Focus()
     End Sub
 
-    Private Sub RssSingleForm_MouseWheel(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseWheel
-        If e.Delta > 0 And lbxStory.SelectedIndex > 0 Then
-            lbxStory.SelectedIndex = lbxStory.SelectedIndex - 1
+    Private Sub RssSingleForm_MouseWheel(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseWheel, lbxStory.MouseWheel, rtbDescr.MouseWheel, rtbXml.MouseWheel, txtName.MouseWheel, txtUrl.MouseWheel
+        If Not rtbDescr.Focus And Not rtbXml.Focus Then
+            lbxStory.Focus()
+        End If
+
+        If e.Delta > 0 And lbxStory.SelectedIndex >= 0 Then
+            If Not lbxStory.SelectedIndex = 0 Then
+                lbxStory.SelectedIndex = lbxStory.SelectedIndex - 1
+            End If
         ElseIf lbxStory.SelectedIndex < lbxStory.Items.Count - 1 Then
             lbxStory.SelectedIndex = lbxStory.SelectedIndex + 1
         End If
+    End Sub
+
+    Public Sub Select_Current_Story()
+        selectedStory = CType(lbxStory.SelectedItem, Story)
     End Sub
 End Class

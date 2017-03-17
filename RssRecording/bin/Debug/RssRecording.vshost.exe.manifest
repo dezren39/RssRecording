@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RssRecording.exe" size="33792">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RssRecording.exe" size="34304">
       <assemblyIdentity name="RssRecording" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>0bXTHvXiTdY8PAf2fIEAkhOvpD6NmE0gQhNO2H7+c/I=</dsig:DigestValue>
+        <dsig:DigestValue>hSK5clQ81yHqDKIzChwVIX6V4YjzINsY+5MegLw2Up8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -68,7 +68,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>fpqtjztqjA5+gI+L8wkb5WDxm/PLGuEKmiuMRD3gwbw=</dsig:DigestValue>
+      <dsig:DigestValue>KpygjSKqraCGuNdJq+TuINplIH7xrKBZMzh9ir/GES8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="RssRecording_log.ldf" size="8388608" writeableType="applicationData">
@@ -77,7 +77,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>OExmPUrW6E1tF57J+nUDykwKwpIEtxkIBRf1qQnIvmc=</dsig:DigestValue>
+      <dsig:DigestValue>N7A6nVR+q60SqDAMT+7Gyp0p9LGCawA7jyUZi8RfnHw=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
